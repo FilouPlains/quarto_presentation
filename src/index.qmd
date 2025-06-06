@@ -1,44 +1,19 @@
 ---
-title: "Demo presentation"
-subtitle: "reveal.js and quarto demo presenation"
-author: "Lucas ROUAUD"
-date: "2025-06-06"
-institute: "IBPC — LBT — CNRS UPR 9080 — UPCité"
+project:
+  type: website
+
+website:
+  title: "Presentation hub"
+
 format:
-  revealjs:
-    theme: simple
+  html:
+    theme: lux
+
+listing:
+  contents:
+    - "*/slides.qmd"
+  type: grid
+  sort:
+    - "date"
+    - "title desc"
 ---
-
-# Hello guys
-
-## Getting up
-
-- Turn off alarm
-- Get out of bed
-
-## Going to sleep
-
-- Get in bed
-- Count sheep
-
-{{< vertical begin >}}
-
-# Are you sure about that?
-
-## Yes I am
-
-## Actually, no.
-
----
-
-# Toto
-
-$$
-\sum_{i = 0}^{N} x^i - y^i
-$$
-
-
-{{< vertical end >}}
-
-# Tata
-
