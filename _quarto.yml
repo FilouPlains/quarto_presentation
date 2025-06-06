@@ -6,6 +6,9 @@ date: "2025-06-06"
 extensions:
   - vertical.lua
 
+project:
+  output-dir: public
+
 format:
   revealjs:
     controls: true
