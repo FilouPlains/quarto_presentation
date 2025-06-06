@@ -1,0 +1,44 @@
+---
+title: "Demo presentation"
+subtitle: "reveal.js and quarto demo presenation"
+author: "Lucas ROUAUD"
+date: "2025-06-06"
+institute: "IBPC — LBT — CNRS UPR 9080 — UPCité"
+format:
+  revealjs:
+    theme: simple
+---
+
+# Hello guys
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+
+## Going to sleep
+
+- Get in bed
+- Count sheep
+
+{{< vertical begin >}}
+
+# Are you sure about that?
+
+## Yes I am
+
+## Actually, no.
+
+---
+
+# Toto
+
+$$
+\sum_{i = 0}^{N} x^i - y^i
+$$
+
+
+{{< vertical end >}}
+
+# Tata
+
