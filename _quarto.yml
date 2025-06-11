@@ -4,10 +4,13 @@ project:
 
 website:
   title: "Quarto interactive presentation"
+  navbar:
+    search: true
 
 format:
   html:
     theme: lux
+    mainfont: "Roboto Light"
 
 language: 
   search-text-placeholder: "Search a presentation"
