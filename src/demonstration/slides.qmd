@@ -1,9 +1,8 @@
 ---
-title: "Demo presentation"
-subtitle: "reveal.js and quarto demo presenation"
+title: "Demonstration presentation"
+subtitle: "reveal.js and quarto"
 author: "Lucas ROUAUD"
-date: "2025-06-06"
-institute: "IBPC — LBT — CNRS UPR 9080 — UPCité"
+date: "2025-06-11"
 format:
   revealjs:
     theme: simple
