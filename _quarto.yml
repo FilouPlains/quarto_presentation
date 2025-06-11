@@ -1,20 +1,10 @@
-title: "Presentation hub"
-subtitle: "reveal.js presentation"
-author: "Lucas ROUAUD"
-date: "2025-06-06"
+website:
+  title: "Quarto Site"
 
 extensions:
   - vertical.lua
+
 project:
+  type: website
   output-dir: public
 
-format:
-  revealjs:
-    controls: true
-    controls-layout: bottom-right
-    controls-back-arrows: visible
-    navigation-mode: grid
-    hash: true
-    slide-number: true
-    slide-level: 0
-    theme: white
