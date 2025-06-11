@@ -3,8 +3,12 @@ title: "Demonstration presentation"
 subtitle: "reveal.js and quarto"
 author: "Lucas ROUAUD"
 date: "2025-06-11"
+
 format:
   revealjs:
+    navigation-mode: grid
+    controls-layout: bottom-right
+    slide-level: 0
     theme: simple
 ---
 
