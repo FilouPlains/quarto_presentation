@@ -1,19 +1,6 @@
 ---
-project:
-  type: website
-
-website:
-  title: "Presentation hub"
-
-format:
-  html:
-    theme: lux
+title: "Presenation hub"
 
 listing:
-  contents:
-    - "*/slides.qmd"
-  type: grid
-  sort:
-    - "date"
-    - "title desc"
+  contents: "*/slides.qmd"
 ---
