@@ -1,6 +1,13 @@
 ---
-title: "Presenation hub"
+title: "Presentation hub"
+subtitle: "Choose a presentation!"
+author: "Lucas ROUAUD"
+date: "2025-06-11"
 
 listing:
   contents: "*/slides.qmd"
+  type: "grid"
+  sort:
+    - "title desc"
+    - "date"
 ---
