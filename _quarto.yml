@@ -1,10 +1,17 @@
-website:
-  title: "Presentation hub"
-
-extensions:
-  - vertical.lua
-
 project:
   type: website
   output-dir: public
+
+website:
+  title: "Quarto interactive presentation"
+
+format:
+  html:
+    theme: lux
+
+language: 
+  search-text-placeholder: "Search a presentation"
+
+extensions:
+  - vertical.lua
 
