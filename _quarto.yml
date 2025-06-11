@@ -1,5 +1,5 @@
 website:
-  title: "Quarto Site"
+  title: "Presentation hub"
 
 extensions:
   - vertical.lua
