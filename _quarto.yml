@@ -17,4 +17,5 @@ language:
 
 extensions:
   - vertical.lua
+  - molstar.lua
 
