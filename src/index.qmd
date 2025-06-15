@@ -5,7 +5,7 @@ author: "Lucas ROUAUD"
 date: "2025-06-11"
 
 listing:
-  contents: "*/slides.qmd"
+  contents: "*/index.qmd"
   type: "grid"
   sort:
     - "title desc"
