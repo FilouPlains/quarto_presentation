@@ -21,6 +21,10 @@ molstar: embed
 - Turn off alarm
 - Get out of bed
 
+![dumb_chatgpt_light.png](dumb_chatgpt_light.png)
+
+---
+
 ## Going to sleep
 
 - Get in bed
