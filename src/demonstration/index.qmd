@@ -10,8 +10,9 @@ format:
     controls-layout: bottom-right
     slide-level: 0
     theme: simple
-
-molstar: embed
+    width: 1080
+    height: 1920
+    margin: 0
 ---
 
 # Hello guys
