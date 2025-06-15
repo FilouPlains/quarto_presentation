@@ -36,69 +36,65 @@
      -----
      - If wrong parameters given, raise a `warning()`.
 --]]
-function molstar(args)
-  if args[1] == nil then
-    error(
-      "Vertical shortcode accept an argument. Get none. Use whether `begin` "
-      .. "or `end`."
-    )
 
-    return pandoc.Null()
+
+function molstar(args, kwargs)
+  local function get(value, default)
+    return (#value > 0) and value or default
   end
 
-  if _G.id == nil then
-    _G.id = 0
+  quarto.doc.add_html_dependency({
+    name = "molstar",
+    version = "4.18.0",
+    scripts = {"html_dependency/molstar.js"},
+    stylesheets = {"html_dependency/molstar.css"}
+  })
+
+  if id == nil then
+    id = 0
   else
-    _G.id = _G.id + 1
+    id = id + 1
   end
 
-  print(_G.id)
-
-  html_code = [[
-    <div id="app-id" class="molstar_app"></div>
+  local html_code = string.format([[
+    <div id="app-id-%s" class="molstar_app"></div>
 
     <script type="text/javascript">
-        let result = molstar.Viewer.create("app-id", {
-            emdbProvider: "rcsb",
-            layoutIsExpanded: true,
-            layoutShowControls: false,
-            layoutShowLeftPanel: false,
-            layoutShowLog: false,
-            layoutShowRemoteState: false,
-            layoutShowSequence: false,
-            pdbProvider: "rcsb",
-            viewportShowAnimation: false,
-            viewportShowControls: false,
-            viewportShowExpand: false,
-            viewportShowSelectionMode: false,
-            viewportShowSettings: false,
+        molstar.Viewer.create("app-id-%s", {
+            emdbProvider: '%s',
+            pdbProvider: '%s',
+            layoutIsExpanded: %s,
+            layoutShowControls: %s,
+            layoutShowLeftPanel: %s,
+            layoutShowLog: %s,
+            layoutShowRemoteState: %s,
+            layoutShowSequence: %s,
+            viewportShowAnimation: %s,
+            viewportShowControls: %s,
+            viewportShowExpand: %s,
+            viewportShowSelectionMode: %s,
+            viewportShowSettings: %s,
         }).then((viewer) => {
             viewer.loadSnapshotFromUrl((url = "structure.molx"), "molx");
         });
     </script>
-  ]]
-
-  local position = pandoc.utils.stringify(args[1])
-
-  if position == "begin" then
-    return pandoc.RawBlock(
-      "html",
-      "</section>\n<section class='slide level0'>\n<section>"
-    )
-  end
-
-  if position == "end" then
-    return pandoc.RawBlock(
-      "html",
-      "</section>\n</section>\n<section class='slide level0'>"
-    )
-  end
-
-  error(
-    "Invalid argument to vertical shortcode: `"
-    .. position
-    .. "`. Use whether `begin` or `end`."
+  ]],
+    id,
+    id,
+    get(kwargs["emdbProvider"], "rcsb"),
+    get(kwargs["pdbProvider"], "rcsb"),
+    get(kwargs["layoutIsExpanded"], "true"),
+    get(kwargs["layoutShowControls"], "true"),
+    get(kwargs["layoutShowLeftPanel"], "true"),
+    get(kwargs["layoutShowLog"], "true"),
+    get(kwargs["layoutShowRemoteState"], "true"),
+    get(kwargs["layoutShowSequence"], "true"),
+    get(kwargs["viewportShowAnimation"], "true"),
+    get(kwargs["viewportShowControls"], "true"),
+    get(kwargs["viewportShowExpand"], "true"),
+    get(kwargs["viewportShowSelectionMode"], "true"),
+    get(kwargs["viewportShowSettings"], "true")
   )
 
-  return pandoc.Null()
+  return pandoc.RawBlock("html", html_code)
 end
