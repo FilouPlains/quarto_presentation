@@ -51,4 +51,5 @@ $$
 
 # Tata
 
-{{< mol-rcsb 7sgl >}}
+{{< molstar end >}}
+{{< molstar summary="lol" emdbProvider="emdb" >}}
