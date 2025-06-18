@@ -181,43 +181,52 @@ Lucas ROUAUD
 
     <script type="text/javascript">
         molstar.Viewer.create("app-id-0", {
-            emdbProvider: 'rcsb',
-            pdbProvider: 'rcsb',
-            layoutIsExpanded: true,
-            layoutShowControls: true,
-            layoutShowLeftPanel: true,
-            layoutShowLog: true,
-            layoutShowRemoteState: true,
-            layoutShowSequence: true,
-            viewportShowAnimation: true,
-            viewportShowControls: true,
-            viewportShowExpand: true,
-            viewportShowSelectionMode: true,
-            viewportShowSettings: true,
+emdbProvider: 'rcsb',
+viewportShowAnimation: false,
         }).then((viewer) => {
-            viewer.loadSnapshotFromUrl((url = "structure.molx"), "molx");
+viewer.loadStructureFromUrl('https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.xyz', 'xyz')
+viewer.loadVolumeFromUrl({url: 'https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/density.cube', format: 'cube', isBinary: false,}, [{type: 'relative', value: 0}])
+viewer.loadPdb('7SGL')
+viewer.loadAlphaFoldDb('Q8W3K0');
         });
     </script>
   
+</section>
+<section class="slide level0">
+
+<h1>Some other beautiful test</h1>
     <div id="app-id-1" class="molstar_app"></div>
 
     <script type="text/javascript">
         molstar.Viewer.create("app-id-1", {
-            emdbProvider: 'emdb',
-            pdbProvider: 'rcsb',
-            layoutIsExpanded: true,
-            layoutShowControls: true,
-            layoutShowLeftPanel: true,
-            layoutShowLog: true,
-            layoutShowRemoteState: true,
-            layoutShowSequence: true,
-            viewportShowAnimation: true,
-            viewportShowControls: true,
-            viewportShowExpand: true,
-            viewportShowSelectionMode: true,
-            viewportShowSettings: true,
         }).then((viewer) => {
-            viewer.loadSnapshotFromUrl((url = "structure.molx"), "molx");
+viewer.loadStructureFromUrl('https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.pdb', 'pdb');
+        });
+    </script>
+  
+</section>
+<section class="slide level0">
+
+<h1>Trajectory?</h1>
+    <div id="app-id-2" class="molstar_app"></div>
+
+    <script type="text/javascript">
+        molstar.Viewer.create("app-id-2", {
+        }).then((viewer) => {
+viewer.loadTrajectory({model: {kind: 'model-url', url: 'https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.pdb', format: 'pdb',}, coordinates: {kind: 'coordinates-url', url: 'https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.xtc', format: 'xtc', isBinary: true,}});
+        });
+    </script>
+  
+</section>
+<section class="slide level0">
+
+<h1>Trajectory?</h1>
+    <div id="app-id-3" class="molstar_app"></div>
+
+    <script type="text/javascript">
+        molstar.Viewer.create("app-id-3", {
+        }).then((viewer) => {
+viewer.loadTrajectory({model: {kind: 'model-url', url: './example.pdb', format: 'pdb',}, coordinates: {kind: 'coordinates-url', url: './example.xtc', format: 'xtc', isBinary: true,}});
         });
     </script>
   
@@ -405,12 +414,12 @@ Lucas ROUAUD
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1080,
+        width: 1050,
 
-        height: 1920,
+        height: 700,
 
         // Factor of the display size that should remain empty around the content
-        margin: 0,
+        margin: 0.1,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
