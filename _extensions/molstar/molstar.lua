@@ -154,4 +154,5 @@ function molstar(args, kwargs)
   )
 
   return pandoc.RawBlock("html", html_code)
+                    viewer.plugin.canvas3d.setProps({transparentBackground: true});
 end
