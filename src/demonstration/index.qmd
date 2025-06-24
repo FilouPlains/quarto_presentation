@@ -26,6 +26,8 @@ format:
 - Turn off alarm
 - Get out of bed
 
+{{< qrcode https://quarto.org >}}
+
 ![dumb_chatgpt_light.png](dumb_chatgpt_light.png)
 
 ---
