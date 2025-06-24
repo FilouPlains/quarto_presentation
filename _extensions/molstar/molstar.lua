@@ -1,43 +1,95 @@
 --[[
-     Shortcode handler for defining vertical slide sections in Quarto
-     Reveal.js presentations.
+    Generates an embeddable Mol* molecular viewer iframe with configurable
+    loading options, passed as shortcode arguments from Quarto.
 
-     Usages
-     ------
-     ```markdown
-     {{< vertical begin >}}
+    This function processes parameters for Mol* Viewer initialization,
+    including support for multiple data sources such as `PDB`, `AlphaFold`,
+    and custom URLs. It handles raw JS injection and HTML composition
+    for Quarto Reveal.js or HTML documents.
 
-     # Vertical slide 1
+    Usages
+    ------
+    ```markdown
+    {{< molstar
+        loadPdb="7SGL"
+        loadAlphaFoldDb="Q8W3K0"
+        loadStructureFromUrl="[
+          https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.xyz,
+          xyz
+        ]"
+        loadVolumeFromUrl="[
+          https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/density.cube,
+          cube,
+          false
+        ]"
+        viewportShowAnimation="false"
+        emdbProvider="rcsb"
+        transparent="true"
+     >}}
+    ```
 
-     ---
+    Authors
+    -------
+    Lucas ROUAUD, MIT 2025-06-24
 
-     # Vertical slide 2
+    Parameters
+    ----------
+    args : `table`
+        Currently unused placeholder, included for Quarto shortcode compatibility.
 
-     {{< vertical end >}}
-     ```
+    kwargs : `table`
+        A key-value table of string arguments for configuring the Mol* viewer.
+        These can be rendering settings (e.g., `transparent`) or data loading
+        operations (`loadPdb`, `loadStructureFromUrl`, etc.).
 
-     Authors
-     -------
-     - Lucas ROUAUD, MIT 2025-06-03
+        Supported keys include:
+        - `transparent`: `true` or `false` – sets a transparent background.
+        - `loadPdb`: `str` – loads a PDB entry.
+        - `loadAlphaFoldDb`: `str` – loads an AlphaFold entry.
+        - `loadStructureFromUrl`: `str` – CSV of `[url, format]`.
+        - `loadVolumeFromUrl`: `str` – CSV of `[url, format, isBinary]`.
+        - `loadTrajectory`: `str` – CSV of `[modelUrl, modelFormat, coordUrl, coordFormat, isBinary]`.
+	- Any parameters support by molstar, like `viewportShowAnimation="false"`.
 
-     Parameters
-     ----------
-     args : `str`
-         The function argument. whether `begin` to start the vertical slides
-	 or `end` to end them.
-	
-     Returns
-     -------
-     `pandoc.RawBlock` or `pandoc.Null`
-         Whether sections tags to inject to the final `.html` or nothing, if
-	 wrong parameters provides.
+    Returns
+    -------
+    `pandoc.RawBlock`
+        The iframe code block containing the configured Mol* Viewer HTML
+        and embedded JavaScript, ready to be rendered in the final output.
 
-     Warns
-     -----
-     - If wrong parameters given, raise a `warning()`.
+    Warns
+    -----
+    - Raises an `error()` if one of the loader keys has incorrect number
+      of parameters (e.g., missing `format` or `isBinary` for `loadTrajectory`).
 --]]
-
 function molstar(args, kwargs)
+    --[[
+        Splits a comma-separated string into a cleaned Lua table of values.
+
+        This function removes leading/trailing whitespace and optional square
+        brackets (`[` and `]`) from each element. It is used to parse argument
+        values passed as CSV strings for Mol* data loading operations.
+
+        Authors
+        -------
+        Lucas ROUAUD, MIT 2025-06-24
+
+        Parameters
+        ----------
+        value_list : `str`
+            A string which is a comma-separated list, like `"[url,format]"`.
+
+        Returns
+        -------
+        `table`
+            A list of individual cleaned strings with no brackets and trimmed whitespace.
+
+        Examples
+        --------
+        ```lua
+        split("[pdb, cif]") --> { "pdb", "cif" }
+        ```
+    --]]
     local function split(value_list)
         local result = {}
         local SEPARATOR = ","
@@ -53,6 +105,41 @@ function molstar(args, kwargs)
         return result
     end
 
+    --[[
+        Checks that a parsed list contains the expected number of elements.
+
+        If the provided `value_list` does not match the expected `length`,
+        an error is raised indicating the mismatch. This helps validate
+        loader arguments like `loadStructureFromUrl`, `loadTrajectory`, etc.
+
+        Authors
+        -------
+        - Lucas ROUAUD, MIT 2025-06-24
+
+        Parameters
+        ----------
+        value_list : `table`
+            A list of parsed values to be validated.
+
+        key : `str`
+            The name of the key being validated, used in the error message.
+
+        length : `int`
+            The expected number of elements in `value_list`.
+
+        Raises
+        ------
+        `error`
+            If `#value_list` does not match `length`, an error is thrown
+            with a descriptive message.
+
+        Examples
+        --------
+        ```lua
+        test_size({"a", "b"}, "loadStructureFromUrl", 2) --> passes
+        test_size({"a"}, "loadStructureFromUrl", 2)      --> error
+        ```
+    --]]
     local function test_size(value_list, key, length)
         if #value_list ~= length then
             error("Excepted 2 parameters for `" .. key .. '`. Got "' .. #value_list .. '".')
