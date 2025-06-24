@@ -1,8 +1,10 @@
 ---
-title: "Demonstration presentation"
-subtitle: "reveal.js and quarto"
-author: "Lucas ROUAUD"
-date: "2025-06-11"
+# title: "Demonstration presentation"
+# subtitle: "reveal.js and quarto"
+# author: "Lucas ROUAUD"
+# date: "2025-06-11"
+# 
+# title-slide: false  # ← This disables the auto title slide
 
 resources:
   - example.xtc
@@ -16,6 +18,7 @@ format:
     theme: simple
     margin: 0
     center: true
+    slide-number: h.v
 ---
 
 # This is a title
