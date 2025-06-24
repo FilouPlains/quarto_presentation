@@ -70,6 +70,7 @@ $$
     ]"
     viewportShowAnimation="false"
     emdbProvider="rcsb"
+    transparent="true"
  >}}
 
 ---
