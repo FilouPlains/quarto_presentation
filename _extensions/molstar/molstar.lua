@@ -148,10 +148,16 @@ function molstar(args, kwargs)
 
     local parameter = ""
     local viewer = ""
+    local width = "100%"
+    local height = "100%"
 
     for key, value in pairs(kwargs) do
         if key == "transparent" and value then
             viewer = viewer .. "\nviewer.plugin.canvas3d.setProps({transparentBackground: true});"
+        elseif key == "width" then
+            width = value
+        elseif key == "height" then
+            height = value
         elseif not string.find(key, "load") then
             if value ~= "true" and value ~= "false" then
                 value = '"' .. value .. '"'
@@ -215,15 +221,17 @@ function molstar(args, kwargs)
 
     local html_code = string.format(
         [[
-<iframe id="iframe-id-%s" class="molstar_app" seamless="" allow="fullscreen" style="width: 100%%; height: 75%%;" srcdoc='
+<iframe id="iframe-id-%s" class="molstar_app" seamless="" allow="fullscreen" style="width: %s; height: %s;" srcdoc='
     <html>
         <head>
            <script src="https://molstar.org/viewer/molstar.js"></script>
            <link rel="stylesheet" href="https://molstar.org/viewer/molstar.css" />
 	   	   <style>
-               div.molstar_app {
+               body, div.molstar_app {
                    width: 100%%;
-                   height: 800px;
+                   height: 100%%;
+		   margin: 0;
+		   padding: 0;
                }
 
                div.msp-plugin,
@@ -245,14 +253,14 @@ function molstar(args, kwargs)
                 molstar.Viewer.create("app-id-%s", {%s
                 }).then(viewer => {%s
                 });
-
-
             </script>
         </body>
     </html>
 '></iframe>
-  ]],
+        ]],
         id,
+        width,
+	height,
         id,
         id,
         parameter,
