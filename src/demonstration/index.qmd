@@ -14,30 +14,65 @@ format:
     controls-layout: bottom-right
     slide-level: 0
     theme: simple
-#    width: 1080
-#    height: 1920
-#    margin: 0
+    margin: 0
+    center: true
 ---
 
-# Hello guys
+# This is a title
 
-## Getting up
+## This is a subtitle
 
-- Turn off alarm
-- Get out of bed
+
+:::: {.columns}
+
+::: {.column width="40%"}
+- Some kind of list
+- Very awesome
+
+1. First item
+2. Third item… ?
+:::
+
+::: {.column width="60%"}
+You have also the possibility to put *bold*, _italic_ and `code`!
+:::
+
+::::
+
+---
+
+# You can put nice images
+
+
+![](dumb_chatgpt_light.png)
+
+{{< vertical begin >}}
+
+# You can scrol down ;)
+
+---
+
+# Awesome formula
+
+$$
+\displaystyle\sum_{atom~i = 0}^{total~atom} \left( \dfrac{radius_{atom~i}}{8} \right)
+$$
+
+$$
+\sum_{i = 0}^{N} x^i - y^i
+$$
+
+---
+
+# Include also QR Code :O
 
 {{< qrcode https://quarto.org >}}
 
-![dumb_chatgpt_light.png](dumb_chatgpt_light.png)
+{{< qrcode https://github.com/jmbuhr/quarto-qrcode width=300 height=300 colorDark="#FF00FF" >}}
 
 ---
 
-## Going to sleep
-
-- Get in bed
-- Count sheep
-
-{{< vertical begin >}}
+# Hidden notes
 
 # Are you sure about that?
 
@@ -45,18 +80,13 @@ format:
 
 ## Actually, no.
 
----
-
-# Toto
-
-$$
-\sum_{i = 0}^{N} x^i - y^i
-$$
-
+::: {.notes}
+I am the only one to see that >:)
+:::
 
 {{< vertical end >}}
 
-# Tata
+# You can view molecule :o
 
 {{< molstar
     loadPdb="7SGL"
@@ -77,32 +107,7 @@ $$
 
 ---
 
-# Some other beautiful test
-
-{{< molstar
-    loadStructureFromUrl="[
-      https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.pdb,
-      pdb
-    ]"
- >}}
-
----
-
-# Trajectory?
-
-{{< molstar
-    loadTrajectory="[
-      https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.pdb,
-      pdb,
-      https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.xtc,
-      xtc,
-      true
-    ]"
- >}}
-
----
-
-# Trajectory?
+# And trajectories too!
 
 {{< molstar
     loadTrajectory="[
@@ -112,4 +117,52 @@ $$
       xtc,
       true
     ]"
+    transparent="true"
+    width="100%"
+    height="10cm"
+    layoutIsExpanded="true"
+    layoutShowControls="false"
+    layoutShowLeftPanel="false"
+    layoutShowLog="false"
+    layoutShowRemoteState="false"
+    layoutShowSequence="false"
  >}}
+
+---
+
+# Molstar options 
+## There are a lot of them
+
+- `emdbProvider="rcsb"`
+- `layoutIsExpanded="false"`
+- `layoutShowControls="true"`
+- `layoutShowLeftPanel="true"`
+- `layoutShowLog="true"`
+- `layoutShowRemoteState="true"`
+- `layoutShowSequence="true"`
+- `pdbProvider="rcsb"`
+- `viewportShowAnimation="true"`
+- `viewportShowControls="true"`
+- `viewportShowExpand="true"`
+- `viewportShowSelectionMode="true"`
+- `viewportShowSettings="true"`
+- `width="100%"`
+- `height="100%"`
+
+---
+
+# Nice animated code blocs
+
+```{.python code-line-numbers="|6-8|10"}
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
