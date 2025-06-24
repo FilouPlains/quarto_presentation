@@ -63,7 +63,10 @@ function molstar(args, kwargs)
     local viewer = ""
 
     for key, value in pairs(kwargs) do
-        if not string.find(key, "load") then
+	    print(key, value)
+        if key == "transparent" and value then
+            viewer = viewer .. "\nviewer.plugin.canvas3d.setProps({transparentBackground: true});"
+        elseif not string.find(key, "load") then
             if value ~= "true" and value ~= "false" then
                 value = '"' .. value .. '"'
             end
@@ -71,14 +74,14 @@ function molstar(args, kwargs)
             parameter = parameter .. "\n" .. key .. ": " .. value .. ","
         else
             if key == "loadPdb" then
-                viewer = viewer .. '\nviewer.loadPdb("' .. value .. '")'
+                viewer = viewer .. '\nviewer.loadPdb("' .. value .. '");'
             elseif key == "loadAlphaFoldDb" then
-                viewer = viewer .. '\nviewer.loadAlphaFoldDb("' .. value .. '")'
+                viewer = viewer .. '\nviewer.loadAlphaFoldDb("' .. value .. '");'
             elseif key == "loadStructureFromUrl" then
                 local value_list = split(value)
                 test_size(value_list, key, 2)
 
-                viewer = viewer .. '\nviewer.loadStructureFromUrl("' .. value_list[1] .. '", "' .. value_list[2] .. '")'
+                viewer = viewer .. '\nviewer.loadStructureFromUrl("' .. value_list[1] .. '", "' .. value_list[2] .. '");'
             elseif key == "loadVolumeFromUrl" then
                 local value_list = split(value)
                 test_size(value_list, key, 3)
@@ -90,7 +93,7 @@ function molstar(args, kwargs)
                     .. value_list[2]
                     .. '", isBinary: '
                     .. value_list[3]
-                    .. ',}, [{type: "relative", value: 0}])'
+                    .. ',}, [{type: "relative", value: 0}]);'
             elseif key == "loadTrajectory" then
                 local value_list = split(value)
                 test_size(value_list, key, 5)
@@ -106,12 +109,10 @@ function molstar(args, kwargs)
                     .. value_list[4]
                     .. '", isBinary: '
                     .. value_list[5]
-                    .. ",}})"
+                    .. ",}});"
             end
         end
     end
-
-    local viewer = viewer .. ";"
 
     quarto.doc.add_html_dependency({
         name = "molstar",
@@ -133,6 +134,22 @@ function molstar(args, kwargs)
         <head>
            <script src="https://molstar.org/viewer/molstar.js"></script>
            <link rel="stylesheet" href="https://molstar.org/viewer/molstar.css" />
+	   	   <style>
+               div.molstar_app {
+                   width: 100%%;
+                   height: 800px;
+               }
+
+               div.msp-plugin,
+               div.msp-plugin div.msp-viewport {
+                   background-color: #0000;
+               }
+
+               canvas {
+                   background: none !important;
+               }
+	   </style>
+
         </head>
 
         <body>
@@ -141,8 +158,6 @@ function molstar(args, kwargs)
             <script type="text/javascript">
                 molstar.Viewer.create("app-id-%s", {%s
                 }).then(viewer => {%s
-
-                    viewer.plugin.canvas3d.setProps({transparentBackground: true});
                 });
 
 
