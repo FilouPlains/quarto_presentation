@@ -7,6 +7,7 @@
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/quarto-contrib/qrcodejs-v1.0.0/qrcode.js"></script>
 <script src="../../site_libs/quarto-contrib/molstar-4.18.0/molstar.js"></script>
 <link href="../../site_libs/quarto-contrib/molstar-4.18.0/molstar.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.33">
@@ -151,6 +152,16 @@ Lucas ROUAUD
 <li>Turn off alarm</li>
 <li>Get out of bed</li>
 </ul>
+<div id="" class="qrcode"></div>
+<script type="text/javascript">
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, {"colorDark":"#000000","colorLight":"#ffffff","height":128,"text":"https://quarto.org","width":128});
+  script.remove();
+})();
+</script>
+    
 
 <img data-src="dumb_chatgpt_light.png" class="r-stretch quarto-figure-center"><p class="caption">dumb_chatgpt_light.png</p></section>
 <section class="slide level0">
@@ -177,58 +188,175 @@ Lucas ROUAUD
 </section>
 <section class="slide level0">
 <h1>Tata</h1>
-    <div id="app-id-0" class="molstar_app"></div>
+<iframe id="iframe-id-0" class="molstar_app" seamless="" allow="fullscreen" style="width: 100%; height: 75%;" srcdoc="
+    <html>
+        <head>
+           <script src=&quot;https://molstar.org/viewer/molstar.js&quot;></script>
+           <link rel=&quot;stylesheet&quot; href=&quot;https://molstar.org/viewer/molstar.css&quot; />
+	   	   <style>
+               div.molstar_app {
+                   width: 100%;
+                   height: 800px;
+               }
 
-    <script type="text/javascript">
-        molstar.Viewer.create("app-id-0", {
-emdbProvider: 'rcsb',
+               div.msp-plugin,
+               div.msp-plugin div.msp-viewport {
+                   background-color: #0000;
+               }
+
+               canvas {
+                   background: none !important;
+               }
+	   </style>
+
+        </head>
+
+        <body>
+            <div id=&quot;app-id-0&quot; class=&quot;molstar_app&quot;></div>
+
+            <script type=&quot;text/javascript&quot;>
+                molstar.Viewer.create(&quot;app-id-0&quot;, {
+emdbProvider: &quot;rcsb&quot;,
 viewportShowAnimation: false,
-        }).then((viewer) => {
-viewer.loadStructureFromUrl('https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.xyz', 'xyz')
-viewer.loadVolumeFromUrl({url: 'https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/density.cube', format: 'cube', isBinary: false,}, [{type: 'relative', value: 0}])
-viewer.loadPdb('7SGL')
-viewer.loadAlphaFoldDb('Q8W3K0');
-        });
-    </script>
+                }).then(viewer => {
+viewer.plugin.canvas3d.setProps({transparentBackground: true});
+viewer.loadStructureFromUrl(&quot;https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.xyz&quot;, &quot;xyz&quot;);
+viewer.loadAlphaFoldDb(&quot;Q8W3K0&quot;);
+viewer.loadVolumeFromUrl({url: &quot;https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/density.cube&quot;, format: &quot;cube&quot;, isBinary: false,}, [{type: &quot;relative&quot;, value: 0}]);
+viewer.loadPdb(&quot;7SGL&quot;);
+                });
+
+
+            </script>
+        </body>
+    </html>
+"></iframe>
   
 </section>
 <section class="slide level0">
 
 <h1>Some other beautiful test</h1>
-    <div id="app-id-1" class="molstar_app"></div>
+<iframe id="iframe-id-1" class="molstar_app" seamless="" allow="fullscreen" style="width: 100%; height: 75%;" srcdoc="
+    <html>
+        <head>
+           <script src=&quot;https://molstar.org/viewer/molstar.js&quot;></script>
+           <link rel=&quot;stylesheet&quot; href=&quot;https://molstar.org/viewer/molstar.css&quot; />
+	   	   <style>
+               div.molstar_app {
+                   width: 100%;
+                   height: 800px;
+               }
 
-    <script type="text/javascript">
-        molstar.Viewer.create("app-id-1", {
-        }).then((viewer) => {
-viewer.loadStructureFromUrl('https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.pdb', 'pdb');
-        });
-    </script>
+               div.msp-plugin,
+               div.msp-plugin div.msp-viewport {
+                   background-color: #0000;
+               }
+
+               canvas {
+                   background: none !important;
+               }
+	   </style>
+
+        </head>
+
+        <body>
+            <div id=&quot;app-id-1&quot; class=&quot;molstar_app&quot;></div>
+
+            <script type=&quot;text/javascript&quot;>
+                molstar.Viewer.create(&quot;app-id-1&quot;, {
+                }).then(viewer => {
+viewer.loadStructureFromUrl(&quot;https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.pdb&quot;, &quot;pdb&quot;);
+                });
+
+
+            </script>
+        </body>
+    </html>
+"></iframe>
   
 </section>
 <section class="slide level0">
 
 <h1>Trajectory?</h1>
-    <div id="app-id-2" class="molstar_app"></div>
+<iframe id="iframe-id-2" class="molstar_app" seamless="" allow="fullscreen" style="width: 100%; height: 75%;" srcdoc="
+    <html>
+        <head>
+           <script src=&quot;https://molstar.org/viewer/molstar.js&quot;></script>
+           <link rel=&quot;stylesheet&quot; href=&quot;https://molstar.org/viewer/molstar.css&quot; />
+	   	   <style>
+               div.molstar_app {
+                   width: 100%;
+                   height: 800px;
+               }
 
-    <script type="text/javascript">
-        molstar.Viewer.create("app-id-2", {
-        }).then((viewer) => {
-viewer.loadTrajectory({model: {kind: 'model-url', url: 'https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.pdb', format: 'pdb',}, coordinates: {kind: 'coordinates-url', url: 'https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.xtc', format: 'xtc', isBinary: true,}});
-        });
-    </script>
+               div.msp-plugin,
+               div.msp-plugin div.msp-viewport {
+                   background-color: #0000;
+               }
+
+               canvas {
+                   background: none !important;
+               }
+	   </style>
+
+        </head>
+
+        <body>
+            <div id=&quot;app-id-2&quot; class=&quot;molstar_app&quot;></div>
+
+            <script type=&quot;text/javascript&quot;>
+                molstar.Viewer.create(&quot;app-id-2&quot;, {
+                }).then(viewer => {
+viewer.loadTrajectory({model: {kind: &quot;model-url&quot;, url: &quot;https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.pdb&quot;, format: &quot;pdb&quot;,}, coordinates: {kind: &quot;coordinates-url&quot;, url: &quot;https://raw.githubusercontent.com/jmbuhr/quarto-molstar/refs/heads/main/www/example.xtc&quot;, format: &quot;xtc&quot;, isBinary: true,}});
+                });
+
+
+            </script>
+        </body>
+    </html>
+"></iframe>
   
 </section>
 <section class="slide level0">
 
 <h1>Trajectory?</h1>
-    <div id="app-id-3" class="molstar_app"></div>
+<iframe id="iframe-id-3" class="molstar_app" seamless="" allow="fullscreen" style="width: 100%; height: 75%;" srcdoc="
+    <html>
+        <head>
+           <script src=&quot;https://molstar.org/viewer/molstar.js&quot;></script>
+           <link rel=&quot;stylesheet&quot; href=&quot;https://molstar.org/viewer/molstar.css&quot; />
+	   	   <style>
+               div.molstar_app {
+                   width: 100%;
+                   height: 800px;
+               }
 
-    <script type="text/javascript">
-        molstar.Viewer.create("app-id-3", {
-        }).then((viewer) => {
-viewer.loadTrajectory({model: {kind: 'model-url', url: './example.pdb', format: 'pdb',}, coordinates: {kind: 'coordinates-url', url: './example.xtc', format: 'xtc', isBinary: true,}});
-        });
-    </script>
+               div.msp-plugin,
+               div.msp-plugin div.msp-viewport {
+                   background-color: #0000;
+               }
+
+               canvas {
+                   background: none !important;
+               }
+	   </style>
+
+        </head>
+
+        <body>
+            <div id=&quot;app-id-3&quot; class=&quot;molstar_app&quot;></div>
+
+            <script type=&quot;text/javascript&quot;>
+                molstar.Viewer.create(&quot;app-id-3&quot;, {
+                }).then(viewer => {
+viewer.loadTrajectory({model: {kind: &quot;model-url&quot;, url: &quot;./example.pdb&quot;, format: &quot;pdb&quot;,}, coordinates: {kind: &quot;coordinates-url&quot;, url: &quot;./example.xtc&quot;, format: &quot;xtc&quot;, isBinary: true,}});
+                });
+
+
+            </script>
+        </body>
+    </html>
+"></iframe>
   
 
 
