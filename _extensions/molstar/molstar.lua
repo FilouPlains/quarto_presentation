@@ -150,7 +150,6 @@ function molstar(args, kwargs)
     local viewer = ""
 
     for key, value in pairs(kwargs) do
-	    print(key, value)
         if key == "transparent" and value then
             viewer = viewer .. "\nviewer.plugin.canvas3d.setProps({transparentBackground: true});"
         elseif not string.find(key, "load") then
